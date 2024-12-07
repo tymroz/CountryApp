@@ -1,8 +1,8 @@
-package com.example.countryapp.model;
-
-import java.util.List;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Country {
@@ -16,9 +16,9 @@ public class Country {
     private String region;
     private String subregion;
     @ElementCollection
-    private List<String> currencies;
+    private Map<String, Currency> currencies;
     @ElementCollection
-    private List<String> languages;
+    private Map<String, String> languages;
     private int population;
     @ElementCollection
     private List<String> borders;
@@ -74,19 +74,19 @@ public class Country {
         this.subregion = subregion;
     }
 
-    public List<String> getCurrencies() {
+    public Map<String, Currency> getCurrencies() {
         return currencies;
     }
 
-    public void setCurrencies(List<String> currencies) {
+    public void setCurrencies(Map<String, Currency> currencies) {
         this.currencies = currencies;
     }
 
-    public List<String> getLanguages() {
+    public Map<String, String> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(List<String> languages) {
+    public void setLanguages(Map<String, String> languages) {
         this.languages = languages;
     }
 

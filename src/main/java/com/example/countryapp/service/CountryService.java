@@ -1,11 +1,11 @@
-package com.example.countryapp.service;
+package com.example.demo.service;
 
-import com.example.countryapp.model.Country;
-import com.example.countryapp.repository.CountryRepository;
-
-import org.springframework.stereotype.Service;
+import com.example.demo.model.Country;
+import com.example.demo.model.Currency;
+import com.example.demo.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.core.ParameterizedTypeReference;
@@ -37,8 +37,7 @@ public class CountryService {
                 apiUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<>() {
-                }
+                new ParameterizedTypeReference<>() {}
         );
 
         List<Map<String, Object>> countries = response.getBody();
@@ -57,17 +56,24 @@ public class CountryService {
             country.setRegion((String) countryData.get("region"));
             country.setSubregion((String) countryData.get("subregion"));
             country.setPopulation((Integer) countryData.get("population"));
-            country.setLanguages((List<String>) countryData.get("languages"));
+            country.setLanguages((Map<String, String>) countryData.get("languages"));
             country.setBorders((List<String>) countryData.get("borders"));
             country.setTimezones((List<String>) countryData.get("timezones"));
-            country.setCurrencies((List<String>) countryData.get("currencies"));
 
+            Map<String, Map<String, String>> currencies = (Map<String, Map<String, String>>) countryData.get("currencies");
+            Map<String, Currency> currencyMap = new java.util.HashMap<>();
+            for (Map.Entry<String, Map<String, String>> entry : currencies.entrySet()) {
+                String currencyCode = entry.getKey();
+                Map<String, String> currencyDetails = entry.getValue();
+                Currency currency = new Currency(currencyDetails.get("name"), currencyDetails.get("symbol"));
+                currencyMap.put(currencyCode, currency);
+            }
+            country.setCurrencies(currencyMap);
+
+            // to do saving in database ..
             return country;
         } else {
             throw new RuntimeException("No country data found for alpha3Code: " + alpha3Code);
         }
     }
-
-    // to do ..
-
 }
