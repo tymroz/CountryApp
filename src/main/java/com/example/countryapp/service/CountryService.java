@@ -1,8 +1,9 @@
-package com.example.demo.service;
+package com.example.countryapp.service;
 
-import com.example.demo.model.Country;
-import com.example.demo.model.Currency;
-import com.example.demo.repository.CountryRepository;
+import com.example.countryapp.model.Country;
+import com.example.countryapp.model.Currency;
+import com.example.countryapp.repository.CountryRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

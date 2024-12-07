@@ -1,6 +1,7 @@
-package com.example.demo.model;
+package com.example.countryapp.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.Map;
 
