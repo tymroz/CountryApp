@@ -2,18 +2,27 @@ package com.example.countryapp.model;
 
 import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Country {
 
+    @Id
     private String alpha3Code;
     private String nameCommon;
     private String nameOfficial;
+    @ElementCollection
     private List<String> capital;
     private String region;
     private String subregion;
+    @ElementCollection
     private List<String> currencies;
+    @ElementCollection
     private List<String> languages;
     private int population;
+    @ElementCollection
     private List<String> borders;
+    @ElementCollection
     private List<String> timezones;
 
     // Gettery i Settery
