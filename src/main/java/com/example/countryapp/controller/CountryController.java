@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.countryapp.controller;
+import com.example.countryapp.model.Country;
+import com.example.countryapp.service.CountryService;
 
-import com.example.demo.model.Country;
-import com.example.demo.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
