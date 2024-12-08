@@ -18,23 +18,24 @@ Country Info Service to aplikacja Spring Boot, która pozwala na pobieranie info
 
 ## Instalacja i uruchamianie
 Zbuduj projekt:
-'''
+```
 mvn clean install
-'''
+```
 Uruchom aplikację:
-'''
+```
 mvn spring-boot:run
-'''
+
+```
 Testuj aplikację: Aplikacja domyślnie działa pod adresem http://localhost:8080
 
 ## Użycie
 ### Pobranie danych o kraju
 Endpoint aplikacji (przykład dla kodu Alpha-3 POL):
-'''
+```
 GET http://localhost:8080/countries/POL
-'''
+```
 Odpowiedź JSON:
-'''
+```
 {
   "alpha3Code": "POL",
   "nameCommon": "Poland",
@@ -67,22 +68,22 @@ Odpowiedź JSON:
     "UTC+01:00"
   ]
 }
-'''
+```
 ## Konfiguracja
-### Plik '''application.properties'''
-Aplikacja korzysta z domyślnej konfiguracji H2. Możesz zmienić konfigurację bazy danych w pliku '''application.properties'''
+### Plik `application.properties`
+Aplikacja korzysta z domyślnej konfiguracji H2. Możesz zmienić konfigurację bazy danych w pliku `application.properties`
 Przykład:
-'''
+```
 spring.datasource.url=jdbc:h2:mem:db
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.h2.console.enabled=true
-'''
+```
 
 ## Testy
 testy można uruchomić poleceniem:
-'''
+```
 mvn test
-'''
+```
