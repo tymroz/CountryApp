@@ -33,26 +33,23 @@ public class CountryService {
     private Country fetchAndSaveCountry(String alpha3Code) {
         String apiUrl = "https://restcountries.com/v3.1/alpha/" + alpha3Code;
 
-        // Wywołanie do API i deserializacja odpowiedzi
-        ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
-                apiUrl,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
+        try {
+            ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
+                    apiUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<>() {}
+            );
 
-        List<Map<String, Object>> countries = response.getBody();
-        if (!countries.isEmpty()) {
+            List<Map<String, Object>> countries = response.getBody();
             Map<String, Object> countryData = countries.getFirst();
             Country country = new Country();
 
-            // Mapowanie danych z API na obiekt Country
+            // Mapowanie danych
             country.setAlpha3Code((String) countryData.get("cioc"));
-
             Map<String, Object> name = (Map<String, Object>) countryData.get("name");
             country.setNameCommon((String) name.get("common"));
             country.setNameOfficial((String) name.get("official"));
-
             country.setCapital((List<String>) countryData.get("capital"));
             country.setRegion((String) countryData.get("region"));
             country.setSubregion((String) countryData.get("subregion"));
@@ -72,8 +69,8 @@ public class CountryService {
             country.setCurrencies(currencyMap);
 
             return countryRepository.save(country);
-        } else {
-            throw new RuntimeException("No country data found for alpha3Code: " + alpha3Code);
+        } catch (org.springframework.web.client.HttpClientErrorException.NotFound e) {
+            throw new RuntimeException("Country with alpha3Code " + alpha3Code + " not found in API.", e);
         }
     }
 }
