@@ -65,7 +65,7 @@ JSON response::
 ```
 ## Configuration
 ### `application.properties` file
-The application uses the default H2 configuration. You can change the database configuration in the `application.properties`file
+The application uses the default H2 configuration. You can change the database configuration in the `application.properties`file \
 Example:
 ```
 spring.datasource.url=jdbc:h2:mem:db
