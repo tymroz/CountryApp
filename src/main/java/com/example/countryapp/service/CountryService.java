@@ -33,7 +33,7 @@ public class CountryService {
     private Country fetchAndSaveCountry(String alpha3Code) {
         String apiUrl = "https://restcountries.com/v3.1/alpha/" + alpha3Code;
 
-        // Wywołanie do API i deserializacja odpowiedzi jako lista
+        // Wywołanie do API i deserializacja odpowiedzi
         ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
                 apiUrl,
                 HttpMethod.GET,
@@ -42,8 +42,8 @@ public class CountryService {
         );
 
         List<Map<String, Object>> countries = response.getBody();
-        if (countries != null && !countries.isEmpty()) {
-            Map<String, Object> countryData = countries.get(0);
+        if (!countries.isEmpty()) {
+            Map<String, Object> countryData = countries.getFirst();
             Country country = new Country();
 
             // Mapowanie danych z API na obiekt Country
@@ -71,8 +71,7 @@ public class CountryService {
             }
             country.setCurrencies(currencyMap);
 
-            // to do saving in database ..
-            return country;
+            return countryRepository.save(country);
         } else {
             throw new RuntimeException("No country data found for alpha3Code: " + alpha3Code);
         }

@@ -8,6 +8,4 @@ import java.util.Optional;
 
 public interface CountryRepository extends JpaRepository<Country, String> {
     Optional<Country> findByAlpha3Code(String alpha3Code);
-
-    //to do ...
 }
