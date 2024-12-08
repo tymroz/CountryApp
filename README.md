@@ -1,40 +1,34 @@
 # Country Info Service
-Country Info Service to aplikacja Spring Boot, która pozwala na pobieranie informacji o krajach z publicznego API [REST Countries](https://restcountries.com) i przechowywanie ich w lokalnej bazie danych. 
-### Główne funkcjonalności projektu obejmują:
-* Pobieranie danych o kraju na podstawie kodu Alpha-3 (np. POL dla Polski).
-* Automatyczne zapisanie pobranych danych do bazy danych.
-* Obsługa brakujących informacji i zapewnienie domyślnych wartości w przypadku niepełnych danych.
+Country Info Service is a Spring Boot application that allows you to fetch country information from public API [REST Countries](https://restcountries.com) API and store it in a local database.
+### Main features of the project include:
+* Fetching country data based on the Alpha-3 code (e.g., POL for Poland).
+* Automatically saving the fetched data to the database.
 
-## Technologie użyte w projekcie
-* Język programowania: Java
+## Technologies used in the project
+* Programming language: Java
 * Framework: Spring Boot
-* Baza danych: H2
-* Komunikacja z API: RestTemplate
-* Narzędzia budowy projektu: Maven
+* Database: H2
+* API communication: RestTemplate
+* Build tools: Maven
 
-## Wymagania
-* Java 17 lub nowsza
-* Maven 3.8 lub nowszy
-
-## Instalacja i uruchamianie
-Zbuduj projekt:
+## Installation and running
+Build the project:
 ```
 mvn clean install
 ```
-Uruchom aplikację:
+Run the application:
 ```
 mvn spring-boot:run
-
 ```
-Testuj aplikację: Aplikacja domyślnie działa pod adresem http://localhost:8080
+Test the application: The application runs by default at http://localhost:8080.
 
-## Użycie
-### Pobranie danych o kraju
-Endpoint aplikacji (przykład dla kodu Alpha-3 POL):
+## Usage
+### Fetching country data
+Application endpoint (example for the Alpha-3 code POL):
 ```
 GET http://localhost:8080/countries/POL
 ```
-Odpowiedź JSON:
+JSON response::
 ```
 {
   "alpha3Code": "POL",
@@ -69,10 +63,10 @@ Odpowiedź JSON:
   ]
 }
 ```
-## Konfiguracja
-### Plik `application.properties`
-Aplikacja korzysta z domyślnej konfiguracji H2. Możesz zmienić konfigurację bazy danych w pliku `application.properties`
-Przykład:
+## Configuration
+### `application.properties` file
+The application uses the default H2 configuration. You can change the database configuration in the `application.properties`file
+Example:
 ```
 spring.datasource.url=jdbc:h2:mem:db
 spring.datasource.driverClassName=org.h2.Driver
@@ -82,8 +76,8 @@ spring.jpa.hibernate.ddl-auto=update
 spring.h2.console.enabled=true
 ```
 
-## Testy
-testy można uruchomić poleceniem:
+## Tests
+You can run the tests with the following command:
 ```
 mvn test
 ```
